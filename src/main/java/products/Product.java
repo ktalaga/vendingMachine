@@ -3,11 +3,11 @@ package products;
 public abstract class Product {
 
     private String name;
-    private String brand;
 
-    public Product(String name, String brand) {
+
+    public Product(String name) {
         this.name = name;
-        this.brand = brand;
+
     }
 
     public String getName() {
@@ -18,11 +18,4 @@ public abstract class Product {
         this.name = name;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
 }
