@@ -2,6 +2,7 @@ package vendingMachine;
 
 import coinReturn.CoinReturn;
 import coins.Coin;
+import coins.CoinType;
 import drawer.Drawer;
 
 import java.util.ArrayList;
@@ -40,5 +41,11 @@ public class VendingMachine {
 
     public void setListOfCoinsEntered(ArrayList<Coin> listOfCoinsEntered) {
         this.listOfCoinsEntered = listOfCoinsEntered;
+    }
+
+    public void addCoinToVendingMachine(Coin coin){
+        if(coin.getCoinType() != CoinType.ONEPENCE && coin.getCoinType() != CoinType.TWOPENCE){
+            listOfCoinsEntered.add(coin);
+        }
     }
 }

@@ -118,4 +118,18 @@ public class VendingMachineTest {
         vendingMachine.setListOfCoinsEntered(listOfCoinsEntered_2);
         assertEquals(listOfCoinsEntered_2, vendingMachine.getListOfCoinsEntered());
     }
+
+    @Test
+    public void canAddCoinsToVendingMachine() {
+        vendingMachine.addCoinToVendingMachine(coin_3);
+        vendingMachine.addCoinToVendingMachine(coin_8);
+        assertEquals(2, vendingMachine.getListOfCoinsEntered().size());
+    }
+
+    @Test
+    public void canRefuseToAccept1PenceAnd2PenceCoins() {
+        vendingMachine.addCoinToVendingMachine(coin_1);
+        vendingMachine.addCoinToVendingMachine(coin_2);
+        assertEquals(0, vendingMachine.getListOfCoinsEntered().size());
+    }
 }
