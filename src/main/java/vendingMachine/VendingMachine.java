@@ -48,20 +48,21 @@ public class VendingMachine {
         this.listOfCoinsEntered = listOfCoinsEntered;
     }
 
-    public void addCoinToVendingMachine(Coin coin){
-        if(coin.getCoinType() != CoinType.ONEPENCE && coin.getCoinType() != CoinType.TWOPENCE){
+    public void addCoinToVendingMachine(Coin coin) {
+        if (coin.getCoinType() != CoinType.ONEPENCE && coin.getCoinType() != CoinType.TWOPENCE) {
             listOfCoinsEntered.add(coin);
         }
     }
 
-    public double getTotalOfListOfCoinEntered(){
+    public double getTotalOfListOfCoinEntered() {
         double credit = 0;
-        for(Coin coin : listOfCoinsEntered){
+        for (Coin coin : listOfCoinsEntered) {
             credit += coin.getCoinType().getValue();
-        }return credit;
+        }
+        return credit;
     }
 
-    public void setTotalOfCoinsEnteredTo0(){
+    public void setTotalOfCoinsEnteredTo0() {
         listOfCoinsEntered.clear();
     }
 
@@ -78,20 +79,23 @@ public class VendingMachine {
             if (drawer.getCode() == codeEntered) {
                 return drawer.returnProductFromDrawer(drawer.getStock().remove(0));
             }
-        }return null;
+        }
+        return null;
     }
 
     public double getTotalInTill() {
         double total = 0;
-        for(Coin coinInTill : till){
+        for (Coin coinInTill : till) {
             total += coinInTill.getCoinType().getValue();
-        }return total;
+        }
+        return total;
     }
-    public Product buyProduct(CodeType codeEntered){
 
-        for(Drawer drawer : drawers){
+    public Product buyProduct(CodeType codeEntered) {
+
+        for (Drawer drawer : drawers) {
             double totalInTillBeforePayment = getTotalInTill();
-            if(drawer.getCode() == codeEntered) {
+            if (drawer.getCode() == codeEntered) {
                 if (drawer.getPrice() <= getTotalOfListOfCoinEntered()) {
                     for (Coin coinEntered : getListOfCoinsEntered()) {
                         till.add(coinEntered);
@@ -105,8 +109,12 @@ public class VendingMachine {
         return null;
     }
 
-    public
-
-
-
+    public Coin getCoinByTypeFromTill(CoinType coinTypeSearched) {
+        for (Coin coin : till){
+            if(coinTypeSearched == coin.getCoinType()){
+                return till.remove(till.indexOf(coin));
+            }
+        }
+        return null;
+    }
 }

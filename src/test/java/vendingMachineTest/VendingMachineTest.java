@@ -188,4 +188,12 @@ public class VendingMachineTest {
         vendingMachine.vendProduct(CodeType.A1);
         assertEquals(sweet_2, vendingMachine.vendProduct(CodeType.A1));
     }
+
+    @Test
+    public void canGetCoinByTypeFromTill() {
+        vendingMachine.getCoinByTypeFromTill(CoinType.FIFTYPENCE);
+//        assertEquals(coin_6, vendingMachine.getCoinByTypeFromTill(CoinType.FIFTYPENCE));
+        assertEquals(5, vendingMachine.getTill().size());
+        assertEquals(3.35, vendingMachine.getTotalInTill(), 0.00);
+    }
 }
