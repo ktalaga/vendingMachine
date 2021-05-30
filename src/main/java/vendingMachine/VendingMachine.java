@@ -14,11 +14,14 @@ public class VendingMachine {
     private ArrayList<Drawer> drawers;
     private CoinReturn coinReturn;
     private ArrayList<Coin> listOfCoinsEntered;
+    private ArrayList<Coin> till;
 
-    public VendingMachine(ArrayList<Drawer> drawers, CoinReturn coinReturn, ArrayList<Coin> listOfCoinsEntered) {
+
+    public VendingMachine(ArrayList<Drawer> drawers, CoinReturn coinReturn, ArrayList<Coin> listOfCoinsEntered, ArrayList<Coin> till) {
         this.drawers = drawers;
         this.coinReturn = coinReturn;
         this.listOfCoinsEntered = listOfCoinsEntered;
+        this.till = till;
     }
 
     public ArrayList<Drawer> getDrawers() {
@@ -58,13 +61,52 @@ public class VendingMachine {
         }return credit;
     }
 
-    public Product buyProduct(CodeType codeEntered){
-        for(Drawer drawer : drawers){
-            if(drawer.getCode() == codeEntered){
-                if(drawer.getPrice() <= getTotalOfListOfCoinEntered()){
-                    return drawer.returnProductFromDrawer(drawer.getStock().remove(0));
-                }
+    public void setTotalOfCoinsEnteredTo0(){
+        listOfCoinsEntered.clear();
+    }
+
+    public ArrayList<Coin> getTill() {
+        return till;
+    }
+
+    public void setTill(ArrayList<Coin> till) {
+        this.till = till;
+    }
+
+    public Product vendProduct(CodeType codeEntered) {
+        for (Drawer drawer : drawers) {
+            if (drawer.getCode() == codeEntered) {
+                return drawer.returnProductFromDrawer(drawer.getStock().remove(0));
             }
         }return null;
     }
+
+    public double getTotalInTill() {
+        double total = 0;
+        for(Coin coinInTill : till){
+            total += coinInTill.getCoinType().getValue();
+        }return total;
+    }
+    public Product buyProduct(CodeType codeEntered){
+
+        for(Drawer drawer : drawers){
+            double totalInTillBeforePayment = getTotalInTill();
+            if(drawer.getCode() == codeEntered) {
+                if (drawer.getPrice() <= getTotalOfListOfCoinEntered()) {
+                    for (Coin coinEntered : getListOfCoinsEntered()) {
+                        till.add(coinEntered);
+                        if (totalInTillBeforePayment == getTotalInTill() - getTotalOfListOfCoinEntered()) {
+                            return vendProduct(codeEntered);
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public
+
+
+
 }

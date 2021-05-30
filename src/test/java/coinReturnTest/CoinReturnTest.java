@@ -39,14 +39,14 @@ public class CoinReturnTest {
 
     @Test
     public void hasTill(){
-        assertEquals(till, coinReturn.getTill());
+        assertEquals(till, coinReturn.getReturnedCoins());
     }
 
     @Test
     public void refuseToAddOnePennyAndTwoPennyCoins(){
         coinReturn.addCoinToCoinReturn(coin_1);
         coinReturn.addCoinToCoinReturn(coin_2);
-        assertEquals(0, coinReturn.getTill().size());
+        assertEquals(0, coinReturn.getReturnedCoins().size());
 
     }
 
@@ -58,7 +58,7 @@ public class CoinReturnTest {
         coinReturn.addCoinToCoinReturn(coin_6);
         coinReturn.addCoinToCoinReturn(coin_7);
         coinReturn.addCoinToCoinReturn(coin_8);
-        assertEquals(6, coinReturn.getTill().size());
+        assertEquals(6, coinReturn.getReturnedCoins().size());
     }
 
     @Test

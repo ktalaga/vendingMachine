@@ -7,26 +7,26 @@ import java.util.ArrayList;
 
 public class CoinReturn {
 
-    private ArrayList<Coin> till;
+    private ArrayList<Coin> returnedCoins;
 
-    public CoinReturn(ArrayList<Coin> till) {
-        this.till = till;
+    public CoinReturn(ArrayList<Coin> returnedCoins) {
+        this.returnedCoins = returnedCoins;
     }
 
-    public ArrayList<Coin> getTill() {
-        return till;
+    public ArrayList<Coin> getReturnedCoins() {
+        return returnedCoins;
     }
 
     public double getTotalAmountInCoinReturn(){
         double totalInCoinReturn = 0;
-        for (Coin coin : till){
+        for (Coin coin : returnedCoins){
             totalInCoinReturn += coin.getCoinType().getValue();
         }return totalInCoinReturn;
     }
 
     public void addCoinToCoinReturn(Coin coin){
         if(coin.getCoinType() != CoinType.ONEPENCE && coin.getCoinType() != CoinType.TWOPENCE){
-            till.add(coin);
+            returnedCoins.add(coin);
         }
     }
 }
