@@ -44,7 +44,8 @@ public class Drawer {
         stock.add(product);
     }
 
-    public void returnProductFromDrawer(Product product){
+    public Product returnProductFromDrawer(Product product){
         stock.remove(product);
+        return product;
     }
 }

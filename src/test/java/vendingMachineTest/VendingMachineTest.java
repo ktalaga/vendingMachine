@@ -61,8 +61,8 @@ public class VendingMachineTest {
         coinReturn = new CoinReturn(till);
         coinReturn_2 = new CoinReturn(till);
         sweet_1 = new Sweet("Mars");
-        sweet_2= new Sweet("Snickers");
-        sweet_3 = new Sweet("Bounty");
+        sweet_2= new Sweet("Mars");
+        sweet_3 = new Sweet("Mars");
         drink_1 = new Drink("Coca-cola");
         crisp_1 = new Crisp("Walkers");
         stock_1 = new ArrayList<>();
@@ -131,5 +131,26 @@ public class VendingMachineTest {
         vendingMachine.addCoinToVendingMachine(coin_1);
         vendingMachine.addCoinToVendingMachine(coin_2);
         assertEquals(0, vendingMachine.getListOfCoinsEntered().size());
+    }
+
+    @Test
+    public void canCalculateTotalOfAllCoinsEntered() {
+        vendingMachine.addCoinToVendingMachine(coin_3);
+        vendingMachine.addCoinToVendingMachine(coin_8);
+        assertEquals(2.05, vendingMachine.getTotalOfListOfCoinEntered(), 0.00);
+    }
+
+    @Test
+    public void canBuyProductIfMoneyInsertedIsBiggerOrEqualToPriceOfProduct() {
+        vendingMachine.addCoinToVendingMachine(coin_8);
+        vendingMachine.buyProduct(CodeType.A1);
+        assertEquals(sweet_2, vendingMachine.buyProduct(CodeType.A1));
+    }
+
+    @Test
+    public void cannotBuyIfMoneyInstertedIsLessThanPriceOfProduct() {
+        vendingMachine.addCoinToVendingMachine(coin_4);
+        vendingMachine.buyProduct(CodeType.A1);
+        assertEquals(null, vendingMachine.buyProduct(CodeType.A1));
     }
 }

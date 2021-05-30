@@ -3,7 +3,9 @@ package vendingMachine;
 import coinReturn.CoinReturn;
 import coins.Coin;
 import coins.CoinType;
+import drawer.CodeType;
 import drawer.Drawer;
+import products.Product;
 
 import java.util.ArrayList;
 
@@ -47,5 +49,22 @@ public class VendingMachine {
         if(coin.getCoinType() != CoinType.ONEPENCE && coin.getCoinType() != CoinType.TWOPENCE){
             listOfCoinsEntered.add(coin);
         }
+    }
+
+    public double getTotalOfListOfCoinEntered(){
+        double credit = 0;
+        for(Coin coin : listOfCoinsEntered){
+            credit += coin.getCoinType().getValue();
+        }return credit;
+    }
+
+    public Product buyProduct(CodeType codeEntered){
+        for(Drawer drawer : drawers){
+            if(drawer.getCode() == codeEntered){
+                if(drawer.getPrice() <= getTotalOfListOfCoinEntered()){
+                    return drawer.returnProductFromDrawer(drawer.getStock().remove(0));
+                }
+            }
+        }return null;
     }
 }
