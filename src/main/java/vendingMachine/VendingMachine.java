@@ -117,4 +117,57 @@ public class VendingMachine {
         }
         return null;
     }
+
+    public double calculateChange(double price, double coinsEntered ){
+        return price - coinsEntered;
+    }
+
+
+
+    public void returnChange(double changeToBeReturned){
+        double changeLeftToBeReturned = changeToBeReturned;
+        if(changeToBeReturned >= 2.00){
+            coinReturn.addCoinToCoinReturn(getCoinByTypeFromTill(CoinType.TWOPOUND));
+            changeLeftToBeReturned -= 2.00;
+            if(changeLeftToBeReturned >= 1.00){
+                coinReturn.addCoinToCoinReturn(getCoinByTypeFromTill(CoinType.ONEPOUND));
+                changeLeftToBeReturned -= 1.00;
+                if(changeLeftToBeReturned >= 0.50){
+                    coinReturn.addCoinToCoinReturn(getCoinByTypeFromTill(CoinType.FIFTYPENCE));
+                    changeLeftToBeReturned -= 1.00;
+                    if(changeLeftToBeReturned >= 0.50){
+                        coinReturn.addCoinToCoinReturn(getCoinByTypeFromTill(CoinType.FIFTYPENCE));
+                        changeLeftToBeReturned -= 0.50;
+                        if(changeLeftToBeReturned >= 0.20){
+                            coinReturn.addCoinToCoinReturn(getCoinByTypeFromTill(CoinType.TWENTYPENCE));
+                            changeLeftToBeReturned -= 0.20;
+                            if(changeLeftToBeReturned >= 0.10){
+                                coinReturn.addCoinToCoinReturn(getCoinByTypeFromTill(CoinType.TENPENCE));
+                                changeLeftToBeReturned -= 0.10;
+                                if(changeLeftToBeReturned >= 0.05){
+                                    coinReturn.addCoinToCoinReturn(getCoinByTypeFromTill(CoinType.FIVEPENCE));
+                                    changeLeftToBeReturned -= 0.05;
+                                    if(changeLeftToBeReturned > 0){
+                                        returnChange(changeLeftToBeReturned);
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    //write a method to get drawer by CodeType and calculate change instead of typing 1.40 in the line below
+
+    public Drawer getDrawerByCodeType(CodeType code){
+        for(Drawer drawer : drawers){
+            if(drawer.getCode() == code){
+                return drawer;
+            }
+        }return null;
+    }
 }
