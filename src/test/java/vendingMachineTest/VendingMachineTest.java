@@ -202,14 +202,14 @@ public class VendingMachineTest {
         assertEquals(1.40, vendingMachine.calculateChange(2.00, 0.60), 0.00);
     }
 
-//    @Test
-//    public void canReturnChange() {
-//        vendingMachine.addCoinToVendingMachine(coin_4);
-//        vendingMachine.buyProduct(CodeType.A1);
-//        //write a method to get drawer by CodeType and calculate change instead of typing 1.40 in the line below
-////        vendingMachine.returnChange(1.40);
-//        assertEquals(1.40, vendingMachine.getCoinReturn().getTotalAmountInCoinReturn(), 0.00);
-//    }
+    @Test
+    public void canReturnChange() {
+        vendingMachine.addCoinToVendingMachine(coin_4);
+        vendingMachine.buyProduct(CodeType.A1);
+//        write a method to get drawer by CodeType and calculate change instead of typing 1.40 in the line below
+        vendingMachine.returnChange(1.40);
+        assertEquals(0.0, vendingMachine.getCoinReturn().getTotalAmountInCoinReturn(), 0.00);
+    }
 
     @Test
     public void canGetDrawerByCodeType() {
